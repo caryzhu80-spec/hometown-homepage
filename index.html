@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Happy+Monkey&family=Lacquer&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Playfair+Display:wght@600&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Special+Elite&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        
+        <!-- HERO SECTION -->
+         <header id="hero">
+            <div id="hero-content">
+                <h1>Toronto</h1>
+                <h2>Embracing the city's sharp contrasts to the beat of four distinct seasons</h2>
+            </div>
+            <div id="hero-image"></div>
+        </header>
+        
+        <main>
+            <!-- ACTIVITIES SECTION -->
+            <section id="season-section" aria-labelledby="seasons-heading">
+                <h2 id="seasons-heading">Four seasons of Toronto</h2>
+                <div id="season" role="group" aria-label="Toronto seasons gallery">
+                    <article id="spring">
+                        <img src="images/spring.jpg" alt="Toronto spring scenery" class="fourseasonsimages">
+                        <div class="card-content">
+                            <h4>Season in Toronto</h4>
+                            <h3>Spring</h3>
+                            <div class="divider"></div>
+                            <div class="discover">Discover</div>
+                        </div>
+                    </article>
+                    <article id="summer">
+                        <img src="images/summer.jpg" alt="Toronto summer scenery" class="fourseasonsimages">
+                        <div class="card-content">
+                            <h4>Season in Toronto</h4>
+                            <h3>Summer</h3>
+                            <div class="divider"></div>
+                            <div class="discover">Discover</div>
+                        </div>
+                    </article>
+                    <article id="fall">
+                        <img src="images/autumn.jpg" alt="Toronto autumn scenery" class="fourseasonsimages">
+                        <div class="card-content">
+                            <h4>Season in Toronto</h4>
+                            <h3>Autumn</h3>
+                            <div class="divider"></div>
+                            <div class="discover">Discover</div>
+                        </div>
+                    </article>
+                    <article id="winter">
+                        <img src="images/winter.jpg" alt="Toronto winter scenery" class="fourseasonsimages">
+                        <div class="card-content">
+                            <h4>Season in Toronto</h4>
+                            <h3>Winter</h3>
+                            <div class="divider"></div>
+                            <div class="discover">Discover</div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <!-- NEWSLETTER SECTION -->
+        <section id="newsletter-section" aria-labelledby="newsletter-heading">
+            <div id="newsletter-card">
+                <h2 id="newsletter-heading">Join my Newsletter for more stories!</h2>
+                <form id="newsletter-form">
+                    <input type="email" placeholder="Email address" required id="email-input">
+                    <button type="submit" id="signup-btn">Sign Up</button>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Modal for Season Details -->
+        <div id="seasonModal" class="modal">
+            <div class="modal-content" id="modalContent">
+                <span class="close">&times;</span>
+                <img id="modalImage" class="modal-image" src="" alt="">
+                <div class="modal-info">
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalDescription">Description will be filled here based on the season selected.</p>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            const modal = document.getElementById('seasonModal');
+            const modalContent = document.getElementById('modalContent');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const closeBtn = document.querySelector('.close');
+
+            const seasonData = {
+                spring: {
+                    title: 'Spring in Toronto',
+                    description: 'Pure, unadulterated relief. The first green shoots and mild breeze signal the great escape from winter. Join the frenzy at High Park for the brief, beautiful window of the cherry blossoms.',
+                    image: 'images/spring.jpg',
+                    modalClass: 'spring-modal'
+                },
+                summer: {
+                    title: 'Summer in Toronto',
+                    description: 'Hot, humid, and happening. This is when the city empties onto the water. Take the ferry to the Toronto Islands for unparalleled skyline views and beach time. The energy from street festivals and lakeside bars is infectious.',
+                    image: 'images/summer.jpg',
+                    modalClass: 'summer-modal'
+                },
+                fall: {
+                    title: 'Autumn in Toronto',
+                    description: 'Crisp, cultured, and cinematic. The heat breaks, and the colours ignite. Drive the nearby ravines to witness the blazing fall foliage in full effect.',
+                    image: 'images/autumn.jpg',
+                    modalClass: 'autumn-modal'
+                },
+                winter: {
+                    title: 'Winter in Toronto',
+                    description: 'Hushed beauty under a blanket of snow. Think fairy lights and cozy corners. Strap on the skates at Nathan Phillips Square or explore the festive markets of the Distillery District. The cold is part of the fun—just bring your warmest layers!.',
+                    image: 'images/winter.jpg',
+                    modalClass: 'winter-modal'
+                }
+            };
+
+            document.getElementById('spring').addEventListener('click', () => openModal('spring'));
+            document.getElementById('summer').addEventListener('click', () => openModal('summer'));
+            document.getElementById('fall').addEventListener('click', () => openModal('fall'));
+            document.getElementById('winter').addEventListener('click', () => openModal('winter'));
+
+            const seasonArticles = document.querySelectorAll('#season article');
+            seasonArticles.forEach(article => {
+                article.setAttribute('tabindex', '0');
+                article.setAttribute('role', 'button');
+                article.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openModal(article.id);
+                    }
+                });
+            });
+
+            function openModal(season) {
+                const data = seasonData[season];
+                modalContent.className = 'modal-content';
+                modalContent.classList.add(data.modalClass);
+                
+                modalImage.src = data.image;
+                modalImage.alt = data.title;
+                modalTitle.textContent = data.title;
+                modalDescription.textContent = data.description;
+                
+                modal.style.display = 'block';
+            }
+
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        </script>
+        
+    </body>
+</html>
